@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, StyleSheet, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRunbookStore } from '../../store/useRunbookStore';
-import type { Playbook, Severity } from '../../types/runbook';
+import type { Playbook } from '../../types/runbook';
 
 interface PlaybookCatalogProps { onEditPlaybook: (playbook?: Playbook) => void; }
 
-export const PlaybookCatalog: React.FC<PlaybookCatalogProps> = ({ onEditPlaybook }) => {
+export const PlaybookCatalog = ({ onEditPlaybook }: PlaybookCatalogProps) => {
   const { playbooks, startExecutionSession, deletePlaybook } = useRunbookStore();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -63,7 +63,7 @@ export const PlaybookCatalog: React.FC<PlaybookCatalogProps> = ({ onEditPlaybook
               <View style={styles.metaInfo}>
                 <Ionicons name="time-outline" size={14} color="#64748b" />
                 <Text style={styles.metaText}>~{pb.estimatedTotalMinutes} min</Text>
-                </View>
+              </View>
               <TouchableOpacity style={styles.executeBtn} onPress={() => startExecutionSession(pb.id)}>
                 <Ionicons name="play" size={14} color="#ffffff" />
                 <Text style={styles.executeBtnText}>Run</Text>
